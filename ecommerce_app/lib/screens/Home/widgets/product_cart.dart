@@ -25,40 +25,41 @@ class ProductCard extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width * 0.45,
+            height: 500,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: kcontentColor,
             ),
-            child: Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 5),
-                  Center(
-                    child: Hero(
-                      tag: product.image,
-                      child: Image.asset(
-                        product.image,
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.cover,
-                      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 5),
+                Center(
+                  child: Hero(
+                    tag: product.image,
+                    child: Image.asset(
+                      product.image,
+                      width: 150,
+                      height: 150,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      product.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                ),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    product.title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Row(
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
@@ -81,40 +82,41 @@ class ProductCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
           ),
           Positioned(
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: const BoxDecoration(
-                    color: kprimaryColor,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(10),
-                    ),
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      provider.toggleFavorite(product);
-                    },
-                    child: Icon(
-                      provider.isExist(product)
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: Colors.white,
-                      size: 22,
-                    ),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                height: 40,
+                width: 40,
+                decoration: const BoxDecoration(
+                  color: kprimaryColor,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(10),
                   ),
                 ),
-              ))
+                child: GestureDetector(
+                  onTap: () {
+                    provider.toggleFavorite(product);
+                  },
+                  child: Icon(
+                    provider.isExist(product)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

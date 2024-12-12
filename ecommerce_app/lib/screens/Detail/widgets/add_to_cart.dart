@@ -18,23 +18,26 @@ class _AddToCartState extends State<AddToCart> {
   @override
   Widget build(BuildContext context) {
     final provider = CartProvider.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
       child: Container(
-        height: 85,
+        height: screenHeight * 0.1,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(screenWidth * 0.1),
           color: Colors.black,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
         alignment: Alignment.center,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 40,
+              height: screenHeight * 0.05,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(screenWidth * 0.05),
                 border: Border.all(color: Colors.white, width: 2),
               ),
               child: Row(
@@ -47,28 +50,29 @@ class _AddToCartState extends State<AddToCart> {
                         });
                       }
                     },
-                    iconSize: 18,
+                    iconSize: screenWidth * 0.04,
                     icon: const Icon(
                       Icons.remove,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(width: 5),
+                  SizedBox(width: screenWidth * 0.01),
                   Text(
                     currentIndex.toString(),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
+                      fontSize: screenWidth * 0.04,
                     ),
                   ),
-                  const SizedBox(width: 5),
+                  SizedBox(width: screenWidth * 0.01),
                   IconButton(
                     onPressed: () {
                       setState(() {
                         currentIndex++;
                       });
                     },
-                    iconSize: 18,
+                    iconSize: screenWidth * 0.04,
                     icon: const Icon(
                       Icons.add,
                       color: Colors.white,
@@ -80,13 +84,13 @@ class _AddToCartState extends State<AddToCart> {
             GestureDetector(
               onTap: () {
                 provider.toogleFavorite(widget.product);
-                // if items is add then show this snackbar
+                // if items are added, then show this snackbar
                 const snackBar = SnackBar(
                   content: Text(
                     "Successfully added!",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
@@ -95,19 +99,20 @@ class _AddToCartState extends State<AddToCart> {
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
               child: Container(
-                height: 55,
+                height: screenHeight * 0.065,
                 decoration: BoxDecoration(
                   color: kprimaryColor,
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(screenWidth * 0.1),
                 ),
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: const Text(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.12),
+                child: Text(
                   "Add to Cart",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenWidth * 0.05,
+                  ),
                 ),
               ),
             )
